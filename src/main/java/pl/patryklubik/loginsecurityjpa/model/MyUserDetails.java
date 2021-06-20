@@ -4,11 +4,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import pl.patryklubik.loginsecurityjpa.security.ApplicationUserRole;
 
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * Create by Patryk Łubik on 15.06.2021.
@@ -20,15 +19,13 @@ public class MyUserDetails implements UserDetails {
     private String username;
     private String password;
     private boolean active;
-    private List<GrantedAuthority> authorities;
+    private Set<SimpleGrantedAuthority> authorities;
 
     public MyUserDetails(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.active = user.isActive();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        this.authorities = ApplicationUserRole.getRole(user.getRole()).getGrantedAuthorities();
     }
 
     @Override

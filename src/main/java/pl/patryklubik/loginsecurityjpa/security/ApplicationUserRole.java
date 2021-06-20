@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static pl.patryklubik.loginsecurityjpa.security.ApplicationUserPermission.*;
 
@@ -34,5 +35,15 @@ public enum ApplicationUserRole {
                 .collect(Collectors.toSet());
         permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
         return permissions;
+    }
+
+    public static ApplicationUserRole getRole(String roleName) {
+        ApplicationUserRole applicationUserRole;
+
+        applicationUserRole = Stream.of(ApplicationUserRole.values())
+                .filter(checkedRole -> checkedRole.name().equals(roleName))
+                .findFirst().get();
+
+        return applicationUserRole;
     }
 }

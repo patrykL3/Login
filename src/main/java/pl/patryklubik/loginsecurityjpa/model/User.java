@@ -1,22 +1,22 @@
 package pl.patryklubik.loginsecurityjpa.model;
 
-//import javax.persistence.*;
+import javax.persistence.*;
 
 
 /**
  * Create by Patryk Łubik on 15.06.2021.
  */
-//
-//@Entity
-//@Table(name = "users")
+
+@Entity
+@Table(name = "users")
 public class User {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
     private boolean active;
-    private String roles;
+    private String role;
 
     User() {}
 
@@ -32,8 +32,8 @@ public class User {
         return username;
     }
 
-    public void setUsername(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -52,12 +52,12 @@ public class User {
         this.active = active;
     }
 
-    public String getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
 
