@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class TemplateController {
 
+    @GetMapping("")
+    public String redirect() {
+        return "menu";
+    }
+
     @GetMapping("login")
     public String getLogin() {
         return "login";
