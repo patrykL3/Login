@@ -18,6 +18,11 @@ public class TemplateController {
         return "menu";
     }
 
+    @GetMapping("registration")
+    public String registration() {
+        return "registration";
+    }
+
     @GetMapping("login")
     public String getLogin() {
         return "login";
