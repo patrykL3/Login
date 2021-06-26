@@ -1,9 +1,5 @@
 package pl.patryklubik.loginsecurityjpa.model;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import pl.patryklubik.loginsecurityjpa.model.User;
-
 import java.util.Optional;
 
 
@@ -13,5 +9,6 @@ import java.util.Optional;
 
 public interface UserRepository {
     Optional<User> findByUsername(String username);
-
+    User save(User entity);
+    boolean existsByUsername(String username);
 }

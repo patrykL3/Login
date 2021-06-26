@@ -1,6 +1,7 @@
 package pl.patryklubik.loginsecurityjpa.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 /**
@@ -8,17 +9,27 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"username"})})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotBlank(message = "Username must not be blank")
     private String username;
+    @NotBlank(message = "Password must not be blank")
     private String password;
     private boolean active;
     private String role;
 
-    User() {}
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public int getId() {
         return id;

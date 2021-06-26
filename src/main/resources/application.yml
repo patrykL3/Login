@@ -8,15 +8,23 @@ spring:
     path: '/console'
 
   .jpa:
-    #    generate-ddl: true
+#    generate-ddl: true
     show-sql: true
     hibernate.ddl-auto: validate
     database-platform: org.hibernate.dialect.H2Dialect
 
+
   .datasource:
     url: 'jdbc:h2:C:/Users/Public/loginDB'
     username: 'sa'
-#server:
+
+
+server:
 #  .servlet:
 #    .session:
 #      timeout: '1m'
+  error:
+    include-binding-errors: always
+    include-message: always
+#    include-stacktrace: on_param
+#    include-exception: true
