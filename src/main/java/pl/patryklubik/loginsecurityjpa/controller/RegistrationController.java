@@ -1,16 +1,16 @@
 package pl.patryklubik.loginsecurityjpa.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 import pl.patryklubik.loginsecurityjpa.model.User;
-import pl.patryklubik.loginsecurityjpa.security.MyUserService;
+import pl.patryklubik.loginsecurityjpa.logic.MyUserService;
 
 import javax.validation.Valid;
-import java.net.URI;
-
 
 /**
  * Create by Patryk Łubik on 24.06.2021.
@@ -26,11 +26,23 @@ public class RegistrationController {
         this.myUserService = myUserService;
     }
 
+
     @PostMapping
-    public ResponseEntity<User> createAccount(@RequestBody @Valid User toCreate) {
+    public String createAccount(@ModelAttribute("user") @Valid User toCreate,
+    BindingResult bindingResult,
+    Model model)
+    {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", "Fill in all fields");
+            return "registration";
+        }
 
-        User result = myUserService.save(toCreate);
-
-        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
+        try {
+            myUserService.save(toCreate);
+            return "login";
+        } catch (ResponseStatusException e) {
+            model.addAttribute("message", e.getReason());
+            return "registration";
+        }
     }
 }

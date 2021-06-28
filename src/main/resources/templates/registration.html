@@ -10,7 +10,6 @@
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
     <link href="/css/main.css" rel="stylesheet">
-
 </head>
 <body>
 <div class="container">
@@ -18,8 +17,8 @@
         <h2 class="form-signin-heading text-center mb-3">Registration</h2>
         <p>
             <label for="username" class="sr-only">Username</label>
-            <input type="text" th:field="*{username}" id="username" class="form-control" placeholder="Username" required=""
-                   autofocus="">
+            <input type="text" th:field="*{username}" id="username" class="form-control" placeholder="Username"
+                   autofocus="" required="">
         </p>
         <p class="mb-0 pb-0 ">
             <label for="password" class="sr-only">Password</label>
@@ -27,8 +26,9 @@
                    placeholder="Password"
                    required="">
         </p>
-
         <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Create account</button>
+
+        <p class="text-danger text-center mt-2" th:if="${message != null}" th:text="${message}"></p>
     </form>
 
 </div>

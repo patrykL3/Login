@@ -1,4 +1,4 @@
-package pl.patryklubik.loginsecurityjpa.security;
+package pl.patryklubik.loginsecurityjpa.logic;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,7 +44,7 @@ public class MyUserService implements UserDetailsService {
     public User save(User toCreate) {
 
         if(userRepository.existsByUsername(toCreate.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User exists.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is taken");
         }
 
         toCreate.setPassword(passwordEncoder.encode(toCreate.getPassword()));
